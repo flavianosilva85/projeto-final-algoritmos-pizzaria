@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Unyleya - Painel Visual do Projeto Final</title>
+    <style>
+        :root {
+            --primary: #e63946;
+            --primary-dark: #b71c1c;
+            --secondary: #457b9d;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2b2d42;
+            --border: #e2e8f0;
+            --accent: #2a9d8f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: var(--text);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary-dark));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .badge-academic {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .alert-info {
+            background-color: #e0f2fe;
+            border-left: 5px solid #0284c7;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            color: #0369a1;
+            font-size: 0.95rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 12px;
+        }
+
+        .card-header h2 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .card-header .icon {
+            font-size: 1.5rem;
+        }
+
+        /* Tabela de Pedidos */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #64748b;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Grafo Canvas */
+        #grafoCanvas {
+            width: 100%;
+            height: 320px;
+            background: #ffffff;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            display: block;
+        }
+
+        /* Calculadora de Frete */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #475569;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus, select:focus {
+            border-color: var(--primary);
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .result-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 15px;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .tag-sabor {
+            display: inline-block;
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍕 Gestão de Pizzaria - Dashboard Visual</h1>
+        <p>Projeto Final: Algoritmos e Estrutura de Dados | Aluno: <strong>Flaviano Silva</strong></p>
+        <span class="badge-academic">Faculdade Unyleya - 2º Período ADS</span>
+    </header>
+
+    <div class="container">
+
+        <div class="alert-info">
+            <strong>💡 Contexto Acadêmico:</strong> O projeto oficial avaliado pelo professor é uma aplicação <strong>Java de Terminal (Console)</strong> baseada no arquivo <code>Pizzaria.java</code>. Este painel no navegador serve como suporte visual interativo para você compreender e demonstrar as regras de negócio dos 3 requisitos: <strong>Alteração de Pedidos</strong>, <strong>Grafo de Sabores</strong> e <strong>Cálculo de Frete</strong>.
+        </div>
+
+        <!-- Indicadores de Vendas (Requisito 2) -->
+        <div class="stats-grid">
+            <div class="card">
+                <div class="stat-number">R$ 135,75</div>
+                <div class="stat-desc">Faturamento Total Acumulado</div>
+            </div>
+            <div class="card">
+                <div class="stat-number">3</div>
+                <div class="stat-desc">Pedidos Realizados</div>
+            </div>
+            <div class="card">
+                <div class="stat-number">4 un</div>
+                <div class="stat-desc">Pizzas Vendidas</div>
+            </div>
+        </div>
+
+        <div class="grid-2">
+            <!-- REQUISITO 1: GESTÃO E ALTERAÇÃO DE PEDIDOS -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">📝</span>
+                    <h2>Requisito 1: Alteração de Pedidos</h2>
+                </div>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px;">
+                    Localize pedidos por <strong>ID</strong> ou <strong>Nome do Cliente</strong> para adicionar/remover pizzas ou trocar o sabor.
+                </p>
+
+                <div style="margin-bottom: 15px;">
+                    <input type="text" id="filtroCliente" placeholder="Buscar por Nome do Cliente ou ID..." onkeyup="filtrarPedidos()" style="width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                </div>
+
+                <table id="tabelaPedidos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Pizzas & Sabores</th>
+                            <th>Total</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoPedidos">
+                        <!-- Gerado via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- REQUISITO 3: CÁLCULO DE FRETE -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">🛵</span>
+                    <h2>Requisito 3: Cálculo de Frete</h2>
+                </div>
+                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 15px;">
+                    Fórmula baseada em: <strong>Taxa Base (R$ 5,00) + R$ 1,50/km + R$ 1,00/pizza (peso da carga)</strong>.
+                </p>
+
+                <div class="form-group">
+                    <label for="distanciaKm">Distância da Entrega (em km):</label>
+                    <input type="number" id="distanciaKm" value="5.0" step="0.5" min="0" oninput="calcularFreteWeb()">
+                </div>
+
+                <div class="form-group">
+                    <label for="qtdPizzas">Quantidade de Pizzas (Peso / Volume):</label>
+                    <input type="number" id="qtdPizzas" value="2" min="1" max="15" oninput="calcularFreteWeb()">
+                </div>
+
+                <div class="result-box">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>Taxa Base de Saída:</span>
+                        <strong>R$ 5,00</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span id="descKm">Deslocamento (5,0 km x R$ 1,50):</span>
+                        <strong id="valorKm">R$ 7,50</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span id="descPeso">Peso da Carga (2 pizza(s) x R$ 1,00):</span>
+                        <strong id="valorPeso">R$ 2,00</strong>
+                    </div>
+                    <hr style="border: none; border-top: 1px solid #cbd5e1; margin: 10px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 700; font-size: 1.1rem; color: var(--dark);">Total do Frete:</span>
+                        <span style="font-weight: 700; font-size: 1.3rem; color: var(--primary);" id="totalFrete">R$ 14,50</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REQUISITO 2: GRAFO DE COOCORRÊNCIA DE SABORES -->
+        <div class="card">
+            <div class="card-header">
+                <span class="icon">🕸️</span>
+                <h2>Requisito 2: Grafo de Conexão entre Sabores (Coocorrência)</h2>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin-bottom: 15px;">
+                O grafo abaixo modela os sabores de pizza como <strong>vértices</strong> e as conexões como <strong>arestas</strong>, onde o peso da aresta indica quantas vezes dois sabores foram pedidos juntos na mesma pizza (meio a meio):
+            </p>
+
+            <canvas id="grafoCanvas" width="1100" height="320"></canvas>
+
+            <div style="margin-top: 20px; font-size: 0.85rem; color: #64748b; text-align: center;">
+                🔴 Vértices: Sabores de Pizza | 🟢 Linhas / Arestas: Combinações frequentes na mesma pizza
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Dados simulados sincronizados com o código Java (Pizzaria.java)
+        let pedidos = [
+            {
+                id: 1,
+                cliente: "Flaviano Silva",
+                pizzas: [
+                    { tamanho: "GRANDE", sabores: ["Calabresa", "Quatro queijos"], preco: 35.00 },
+                    { tamanho: "BROTO", sabores: ["Margherita"], preco: 30.00 }
+                ],
+                total: 65.00
+            },
+            {
+                id: 2,
+                cliente: "Mariana Souza",
+                pizzas: [
+                    { tamanho: "GRANDE", sabores: ["Calabresa", "Frango com Catupiry"], preco: 34.75 }
+                ],
+                total: 34.75
+            },
+            {
+                id: 3,
+                cliente: "Carlos Eduardo",
+                pizzas: [
+                    { tamanho: "GIGA", sabores: ["Pepperoni", "Quatro queijos"], preco: 36.00 }
+                ],
+                total: 36.00
+            }
+        ];
+
+        function renderizarTabela() {
+            const corpo = document.getElementById("corpoPedidos");
+            corpo.innerHTML = "";
+
+            pedidos.forEach(p => {
+                const tr = document.createElement("tr");
+
+                let pizzasHtml = p.pizzas.map(pz => {
+                    return `<div><strong>${pz.tamanho}:</strong> ` + 
+                           pz.sabores.map(s => `<span class="tag-sabor">${s}</span>`).join(" ") +
+                           ` (R$ ${pz.preco.toFixed(2)})</div>`;
+                }).join("");
+
+                tr.innerHTML = `
+                    <td><strong>#${p.id}</strong></td>
+                    <td>${p.cliente}</td>
+                    <td>${pizzasHtml}</td>
+                    <td><strong style="color: #b71c1c;">R$ ${p.total.toFixed(2)}</strong></td>
+                    <td><button class="btn-outline" onclick="simularAlteracao(${p.id})">Editar</button></td>
+                `;
+                corpo.appendChild(tr);
+            });
+        }
+
+        function filtrarPedidos() {
+            const texto = document.getElementById("filtroCliente").value.toLowerCase();
+            const linhas = document.querySelectorAll("#corpoPedidos tr");
+
+            linhas.forEach((linha, i) => {
+                const p = pedidos[i];
+                if (p.cliente.toLowerCase().includes(texto) || p.id.toString() === texto) {
+                    linha.style.display = "";
+                } else {
+                    linha.style.display = "none";
+                }
+            });
+        }
+
+        function simularAlteracao(id) {
+            const pedido = pedidos.find(p => p.id === id);
+            if (!pedido) return;
+
+            const novoSabor = prompt(`[Simulação de Alteração]\nPedido #${pedido.id} de ${pedido.cliente}\nDigite o novo sabor para substituir a primeira pizza (ex: Mussarela, Especial da casa, Atum):`, "Portuguesa");
+            if (novoSabor) {
+                pedido.pizzas[0].sabores = [novoSabor];
+                pedido.pizzas[0].preco = 33.40;
+                pedido.total = pedido.pizzas.reduce((acc, pz) => acc + pz.preco, 0);
+                renderizarTabela();
+                alert(`Sucesso! Sabor alterado para "${novoSabor}". Novo total recalculado: R$ ${pedido.total.toFixed(2)}`);
+            }
+        }
+
+        function calcularFreteWeb() {
+            const dist = parseFloat(document.getElementById("distanciaKm").value) || 0;
+            const qtd = parseInt(document.getElementById("qtdPizzas").value) || 0;
+
+            const custoKm = dist * 1.50;
+            const custoPeso = qtd * 1.00;
+            const taxaBase = 5.00;
+            const total = taxaBase + custoKm + custoPeso;
+
+            document.getElementById("descKm").innerText = `Deslocamento (${dist.toFixed(1)} km x R$ 1,50):`;
+            document.getElementById("valorKm").innerText = `R$ ${custoKm.toFixed(2)}`;
+
+            document.getElementById("descPeso").innerText = `Peso da Carga (${qtd} pizza(s) x R$ 1,00):`;
+            document.getElementById("valorPeso").innerText = `R$ ${custoPeso.toFixed(2)}`;
+
+            document.getElementById("totalFrete").innerText = `R$ ${total.toFixed(2)}`;
+        }
+
+        // Desenho do Grafo de Coocorrência no Canvas HTML5
+        function desenharGrafo() {
+            const canvas = document.getElementById("grafoCanvas");
+            if (!canvas.getContext) return;
+            const ctx = canvas.getContext("2d");
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Nós / Vértices (Sabores)
+            const vertices = {
+                "Calabresa": { x: 260, y: 160, cor: "#e63946" },
+                "Quatro queijos": { x: 550, y: 100, cor: "#f4a261" },
+                "Frango com Catupiry": { x: 260, y: 260, cor: "#2a9d8f" },
+                "Pepperoni": { x: 800, y: 160, cor: "#e76f51" },
+                "Margherita": { x: 550, y: 250, cor: "#457b9d" }
+            };
+
+            // Arestas / Conexões (Pizzas meio a meio)
+            const arestas = [
+                { u: "Calabresa", v: "Quatro queijos", peso: "1x" },
+                { u: "Calabresa", v: "Frango com Catupiry", peso: "1x" },
+                { u: "Pepperoni", v: "Quatro queijos", peso: "1x" }
+            ];
+
+            // 1. Desenha arestas
+            arestas.forEach(a => {
+                const n1 = vertices[a.u];
+                const n2 = vertices[a.v];
+
+                ctx.beginPath();
+                ctx.moveTo(n1.x, n1.y);
+                ctx.lineTo(n2.x, n2.y);
+                ctx.strokeStyle = "#94a3b8";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Rótulo da aresta
+                const midX = (n1.x + n2.x) / 2;
+                const midY = (n1.y + n2.y) / 2;
+                ctx.fillStyle = "#0f172a";
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText(`Juntas (${a.peso})`, midX - 25, midY - 8);
+            });
+
+            // 2. Desenha vértices
+            for (let nome in vertices) {
+                const n = vertices[nome];
+
+                // Círculo
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, 22, 0, 2 * Math.PI);
+                ctx.fillStyle = n.cor;
+                ctx.fill();
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = "#ffffff";
+                ctx.stroke();
+
+                // Nome do sabor
+                ctx.fillStyle = "#1e293b";
+                ctx.font = "bold 13px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(nome, n.x, n.y - 30);
+            }
+        }
+
+        window.onload = function() {
+            renderizarTabela();
+            calcularFreteWeb();
+            desenharGrafo();
+        };
+    </script>
+</body>
+</html>

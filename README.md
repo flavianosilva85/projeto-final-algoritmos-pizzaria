@@ -1,6 +1,6 @@
 # Unyleya - Análise e Desenvolvimento de Sistemas
 ## Disciplina: Algoritmos e Estrutura de Dados (2º Período)
-### Atividade Final - Projeto Pizzaria (Entrega Final com Vídeo)
+### Atividade Final - Projeto de Gestão de Pizzaria
 
 ---
 
@@ -52,24 +52,17 @@ Este projeto consiste no aprimoramento do sistema de gestão de pedidos de uma p
 
 ---
 
-## 🎥 Roteiro para Gravação do Vídeo (Aprox. 5 Minutos)
+## 🚀 Como Executar o Projeto
 
-> [!IMPORTANT]
-> A apresentação em vídeo é obrigatória para a aprovação final. Siga o roteiro cronometrado abaixo para cobrir todos os pontos avaliados com clareza e segurança:
+### Opção 1: Execução Automática (Windows)
+Basta dar um duplo clique no script:
+```text
+Executar_Pizzaria.bat
+```
+O script compila os arquivos do pacote `Projeto` e inicializa a aplicação no terminal automaticamente.
 
-| Tempo | Etapa | O que falar e demonstrar na tela |
-| :--- | :--- | :--- |
-| **0:00 - 0:45** | **Apresentação** | *"Olá, professor e tutor! Meu nome é Flaviano Silva, sou aluno de Análise e Desenvolvimento de Sistemas da Unyleya. Neste vídeo, apresento a implementação da Atividade Final de Algoritmos e Estrutura de Dados, onde aprimorei o sistema de pedidos de pizzaria com alteração de pedidos, relatório com grafos de sabores e cálculo de frete."* |
-| **0:45 - 2:00** | **Requisito 1 (Alterar Pedido)** | Mostre o terminal executando a opção **2 (Alterar Pedido)**.<br>1. Demonstre a busca por **Nome** digitando `Flaviano` ou por **ID** digitando `1`.<br>2. Demonstre a alteração do sabor de uma pizza (trocando para outro sabor do cardápio).<br>3. Demonstre a adição de uma nova pizza e veja o valor total sendo recalculado na hora. Mostre no código a classe `Pedido.java` e o método `recalcularValorTotal()`. |
-| **2:00 - 3:30** | **Requisito 2 (Relatório e Grafo)** | Mostre a opção **4 (Gerar Relatório de Vendas)**.<br>1. Destaque o faturamento total acumulado e o ranking ordenado de sabores mais vendidos.<br>2. Mostre o **Grafo de Coocorrência de Sabores**: explique como o grafo foi modelado em Java (`Map<String, Map<String, Integer>>`) onde cada sabor é um vértice e pizzas meio-a-meio geram arestas com pesos proporcionais à frequência das combinações. |
-| **3:30 - 4:30** | **Requisito 3 (Cálculo de Frete)** | Mostre a opção **6 (Calcular Frete de Entrega)**.<br>1. Selecione um pedido existente e informe uma distância (ex: 5 km).<br>2. Mostre a fórmula em ação: taxa base (R$ 5,00) + R$ 1,50/km + R$ 1,00 por pizza.<br>3. Explique que a quantidade de pizzas atende ao requisito de peso/volume da entrega. |
-| **4:30 - 5:00** | **Conclusão** | *"Como vimos, todos os três requisitos foram plenamente atendidos integrando Programação Orientada a Objetos, Coleções Dinâmicas e Teoria dos Grafos. O código está versionado no GitHub e empacotado para avaliação. Muito obrigado!"* |
-
----
-
-## 🚀 Como Compilar e Executar
-
-No terminal (PowerShell ou CMD) dentro da pasta `Atividade Final`:
+### Opção 2: Compilação Manual via Terminal (PowerShell / CMD)
+Dentro da pasta raiz do projeto:
 
 ```bash
 # Compilar todos os arquivos do pacote Projeto:
@@ -79,9 +72,16 @@ javac Projeto/*.java
 java Projeto.Pizzaria
 ```
 
+### Opção 3: Visualizador Web (Suporte Visual)
+Para abrir o painel complementar no navegador com o grafo de sabores desenhado:
+```text
+Abrir_No_Navegador.bat
+```
+Ou abra diretamente o arquivo `visualizador_web.html` em qualquer navegador.
+
 ---
 
-## 📦 Estrutura de Arquivos da Entrega
+## 📦 Estrutura de Arquivos
 
 ```text
 Atividade Final/
@@ -94,5 +94,8 @@ Atividade Final/
 ├── .gitignore
 ├── Atividade Final.docx
 ├── AtividadeFinal_Pizzaria_Java.zip
+├── Executar_Pizzaria.bat
+├── Abrir_No_Navegador.bat
+├── visualizador_web.html
 └── README.md
 ```

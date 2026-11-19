@@ -1,0 +1,21 @@
+# Arquivos compilados do Java
+*.class
+
+# Empacotamento
+*.jar
+*.war
+*.nar
+*.ear
+
+# Arquivos de IDEs
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Logs e arquivos temporários do SO
+*.log
+Thumbs.db
+.DS_Store

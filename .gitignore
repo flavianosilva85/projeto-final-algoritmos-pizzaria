@@ -19,3 +19,11 @@
 *.log
 Thumbs.db
 .DS_Store
+
+# Gravações brutas da narração do vídeo
+Audio/
+Publicar_no_GitHub.bat
+
+# Arquivos de produção do vídeo (publicado no YouTube)
+Video/
+Corrigir_GitHub.bat

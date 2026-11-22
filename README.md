@@ -14,6 +14,16 @@
 
 ---
 
+## 🎥 Vídeo de Apresentação
+
+[![Assistir à apresentação no YouTube](https://img.youtube.com/vi/vFVAeolQM4E/hqdefault.jpg)](https://youtu.be/vFVAeolQM4E)
+
+**Link:** https://youtu.be/vFVAeolQM4E
+
+O vídeo demonstra os três requisitos rodando no terminal e explica o código de cada um.
+
+---
+
 ## 📋 Visão Geral do Projeto
 
 Este projeto consiste no aprimoramento do sistema de gestão de pedidos de uma pizzaria desenvolvido originalmente em Java durante as aulas da Unidade 4. A partir da estrutura disponibilizada, foram implementados três módulos cruciais de lógica algorítmica e estruturas de dados:
@@ -79,6 +89,12 @@ Abrir_No_Navegador.bat
 ```
 Ou abra diretamente o arquivo `visualizador_web.html` em qualquer navegador.
 
+### ⚠️ Observações de Uso
+- **Números decimais:** o `Scanner` usa o idioma do sistema. Com o Windows em português, digite a distância com vírgula (ex.: `3,5`) ou um número inteiro (ex.: `5`).
+- **Menus:** digite apenas os números das opções exibidas; letras ou opções fora da lista encerram a aplicação.
+- **Dados de teste:** ao iniciar, o sistema carrega 3 clientes e 3 pedidos (incluindo pizzas meio a meio) para que o relatório e o grafo já tenham conteúdo.
+- **Preço por tamanho:** o preço da pizza é a média dos sabores escolhidos; o tamanho (BROTO, GRANDE, GIGA) não altera o valor, como no código-base da disciplina.
+
 ---
 
 ## 📦 Estrutura de Arquivos
@@ -99,3 +115,5 @@ Atividade Final/
 ├── visualizador_web.html
 └── README.md
 ```
+
+> O arquivo `AtividadeFinal_Pizzaria_Java.zip` contém o projeto completo (pasta `Projeto/`, scripts `.bat`, visualizador web e README), pronto para extrair e executar.
